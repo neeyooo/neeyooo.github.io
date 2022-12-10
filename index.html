@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>neeyoo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Karla">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="divku">
+    <h1 id="writing"></h1>
+    <h3 id="fadein"></h3>
+</div>
+</body>
+
+<style>
+    #divku{
+        text-align: left;
+        width: 90%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    body{background-color: #121212;}
+    #writing,#fadein{color: whitesmoke;}
+    #writing{font-family: "Lato",sans-serif;}
+    #fadein{font-family: "Karla",sans-serif;}
+</style>
+<script>
+    function displayTextWidth(text) {
+        let canvas = displayTextWidth.canvas || (displayTextWidth.canvas = document.createElement("canvas"));
+        let context = canvas.getContext("2d");
+        context.font = "32px Lato";
+        let metrics = context.measureText(text);
+        return metrics.width;
+    }
+    $("#fadein").hide();
+    var i = 0;
+    var txt = [
+        "“Sesungguhnya tipu daya (godaan) kalian wahai para wanita begitu besar.”",
+        "p, info kalkulus.",
+        "i love u, but u're not.",
+        "yang maha pengasih, lagi maha penyayang.",
+        "meeting you was one of the best times in my life. i mean you showed me something i've never felt before. you truly made me fall in love with you without even trying.",
+        "“Dan janganlah kamu berputus asa dari rahmat Allah. Sesungguhnya yang berputus asa dari rahmat Allah hanyalah orang-orang kafir.”",
+        "“Dan janganlah kamu membunuh dirimu. Sesungguhnya Allah Maha Penyayang kepadamu.”",
+        `> Ih lupa judul lagunya X
+        > Apa yaaaaa X
+        < lu mulai menua kyknya X
+        > Carii X
+        < males X
+        < mending tidur X
+        > :) X
+        > Serah lau deh X
+        < No Other Heart - Mac DeMarco X
+        > Mwehehehehee X
+        > :* X
+        < wwkwkkw X
+        < ga ngambek lagi`];
+    var randomNumber = Math.floor(Math.random() * txt.length)
+    var txt1 = txt[randomNumber];
+    var lebarTeks = Math.ceil(displayTextWidth(txt1)) + 1;
+    if(lebarTeks < screen.width){$("#divku").css("width",`${lebarTeks}px`)}
+    if(txt1 == txt[0]){$("#fadein").text("(QS. Yusuf: 28)")}
+    if(txt1 == txt[1]){$("#divku").css("text-align","center")}
+    if(txt1 == txt[2]){$("#fadein").text("> Ryujin"); $("#divku").css("text-align","center")}
+    if(txt1 == txt[3]){$("#fadein").text("- Allah swt.")}
+    if(txt1 == txt[5]){$("#fadein").text("(QS. Yusuf: 87)")}
+    if(txt1 == txt[6]){$("#fadein").text("(QS. An-Nisa: 29)")}
+    if(txt1 == txt[7]){$("#divku").css("text-align","left").css("width","300px");$("#fadein").text("- lucu bgt lu bego");$("#writing").css("fontSize","20px");}
+    var speed = 100;
+    function typeWriter(){
+        if (i < txt1.length) {
+            if(txt1.charAt(i) == 'X'){document.getElementById("writing").innerHTML += '<br />';}
+            else{document.getElementById("writing").innerHTML += txt1.charAt(i);}
+            i++;
+            if(txt1.charAt(i-1) == '.' && txt1.charAt(i) != '”'){setTimeout(typeWriter, 500);}
+            else{setTimeout(typeWriter, speed);}
+        }else{setTimeout(function(){$("#fadein").fadeIn(2000);},500)}
+    }
+    typeWriter();
+</script>
+
+</html>
